@@ -1,0 +1,11 @@
+*No link abaixo tem como confingurar um proxy reverso
+
+https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Docker-Nginx-reverse-proxy-setup-example
+
+O que falta?
+
+1 - O banco está ok, então acho q nao precisaria mexer no mysql
+2 - Configurar o proxy reverso no ngnix para apontar para o node (veja link acima em *)
+3 - Alterar o node só pra responder para o ngnix
+4 - Alterar o node pra inserir uma pessoa a cada busca, hoje ele só insere quando sobe a app
+5 - Revisar tudo e submeter
