@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+        - fcnet
+  nginx:
+    image: nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    networks:
+      - fcnet
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    image: wilsondaniels/node
+    container_name: node
+    networks:
+      - fcnet
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node:/usr/src/app
+    tty: true
+networks:
+    fcnet:
+      driver: bridge
